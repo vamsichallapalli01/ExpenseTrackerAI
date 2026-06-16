@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import dj_database_url
 import os
 from pathlib import Path
 
@@ -24,10 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0_z--)4rzt==v3+kw*%9xo^3t=2rm!hk($yy0@j)q(r3+=sb94'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://expensetrackerai-hv8h.onrender.com"
+]
 ALLOWED_HOSTS = [
-    "expense-tracker-ai.onrender.com"
+    "expensetrackerai-hv8h.onrender.com",
+    "expense-tracker-ai.onrender.com",
+
 ]
 
 
@@ -79,10 +85,9 @@ WSGI_APPLICATION = 'moneytracker.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
 }
 
 
