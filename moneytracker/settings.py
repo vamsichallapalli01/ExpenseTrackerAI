@@ -29,7 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
 
-    "*"
+    "expense-tracker-ai.onrender.com"
 
 ]
 
