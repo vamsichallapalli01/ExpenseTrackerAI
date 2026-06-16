@@ -15,7 +15,7 @@ urlpatterns = [
 
     path(
         '',
-        include('tracker.urls')
+        include("tracker.urls")
     ),
 
     path(
@@ -31,6 +31,9 @@ urlpatterns = [
         auth_views.LogoutView.as_view(),
         name='logout'
     ),
+    path('accounts/', 
+         include('django.contrib.auth.urls')
+        ),
 
 ]
 urlpatterns += static(
