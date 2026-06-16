@@ -27,16 +27,15 @@ SECRET_KEY = 'django-insecure-0_z--)4rzt==v3+kw*%9xo^3t=2rm!hk($yy0@j)q(r3+=sb94
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://expensetrackerai-hv8h.onrender.com"
-]
 ALLOWED_HOSTS = [
     "expensetrackerai-hv8h.onrender.com",
-    "expense-tracker-ai.onrender.com",
+    ".onrender.com",
 
 ]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://expensetrackerai-hv8h.onrender.com",
+]
 # Application definition
 
 INSTALLED_APPS = [
