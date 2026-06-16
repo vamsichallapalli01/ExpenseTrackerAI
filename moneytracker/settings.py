@@ -29,13 +29,16 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
 
-    "expense-tracker-ai.onrender.com"
-
+    "expensetrackerai-hst6.onrender.com",
+    ".onrender.com",
+    "localhost",
+    "127.0.0.1"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://expensetrackerai-hv8h.onrender.com",
+    "https://expensetrackerai-hst6.onrender.com",
 ]
+
 # Application definition
 
 INSTALLED_APPS = [
