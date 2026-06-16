@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-0_z--)4rzt==v3+kw*%9xo^3t=2rm!hk($yy0@j)q(r3+=sb94
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "*"
+    "expense-tracker-ai.onrender.com"
 ]
 
 
@@ -133,6 +133,6 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
-LOGIN_URL = "/login/"
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
