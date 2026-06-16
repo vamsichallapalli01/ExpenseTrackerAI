@@ -100,6 +100,35 @@ class IncomeForm(forms.ModelForm):
             'date'
         ]
 
+        widgets = {
+
+            'source': forms.TextInput(
+
+                attrs={
+                    'class': 'form-control'
+                }
+
+            ),
+
+            'amount': forms.NumberInput(
+
+                attrs={
+                    'class': 'form-control'
+                }
+
+            ),
+
+            'date': forms.DateInput(
+
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date'
+                }
+
+            )
+
+        }
+
 
 class ExpenseForm(forms.ModelForm):
 
@@ -267,7 +296,6 @@ class RecurringExpenseForm(
 
         }
 
-class IncomeForm(forms.ModelForm):
 
     class Meta:
 
