@@ -28,9 +28,7 @@ SECRET_KEY = 'django-insecure-0_z--)4rzt==v3+kw*%9xo^3t=2rm!hk($yy0@j)q(r3+=sb94
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "expensetrackerai-hv8h.onrender.com",
-    ".onrender.com",
-
+    "*"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
