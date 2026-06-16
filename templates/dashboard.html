@@ -1,0 +1,557 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Welcome {{ request.user.username }}
+</h2>
+<h2 class="mb-4">
+
+    Financial Summary
+
+</h2>
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow border-0 h-100">
+
+            <div class="card-body text-center">
+                <h5>
+                    <i class="bi bi-cash-stack"></i>
+                    Total Income
+                </h5>
+
+                <h2 class="text-success">
+                    ${{ total_income }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h5>
+                    <i class="bi bi-credit-card"></i>
+                    Total Expenses
+                </h5>
+
+                <h2 class="text-danger">
+                    ${{ total_expense }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card shadow border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h5>
+                    <i class="bi bi-piggy-bank"></i>
+                    Savings
+                </h5>
+
+                <h2 class="text-primary">
+                    ${{ savings }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mb-4">
+
+    <a href="/income/add/" class="btn btn-success">
+        Add Income
+    </a>
+
+    <a href="/expense/add/" class="btn btn-danger">
+        Add Expense
+    </a>
+
+    <a href="/budget/" class="btn btn-primary">
+        Set Budget
+    </a>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Recent Expenses
+</h2>
+
+<!-- Recent Expenses -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+            Recent Expenses
+        </h3>
+
+        <div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for expense in recent_expenses %}
+
+            <tr>
+
+                <td>{{ expense.category }}</td>
+
+                <td>${{ expense.amount }}</td>
+
+                <td>{{ expense.date }}</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="3">
+
+                    No expenses found
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+    </div>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Budget Overview
+</h2>
+
+<!-- Budget Overview -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+            Budget Overview
+        </h3>
+
+        <p>
+            Monthly Budget:
+            <strong>
+                ${{ monthly_budget }}
+            </strong>
+        </p>
+
+        <p>
+            Remaining Budget:
+            <strong>
+                ${{ remaining_budget }}
+            </strong>
+        </p>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                role="progressbar"
+                style="width: {{ budget_percent }}%;">
+
+                {{ budget_percent }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Monthly Summary
+</h2>
+
+<!-- Monthly Summary -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h3>
+            Monthly Summary
+        </h3>
+
+        <p>
+            Total Spent This Month:
+            <strong>
+                ${{ monthly_expense_total }}
+            </strong>
+        </p>
+
+        <p>
+            Total Income This Month:
+            <strong>
+                ${{ monthly_income_total }}
+            </strong>
+        </p>
+
+        <p>
+            Monthly Savings:
+            <strong>
+                ${{ monthly_savings }}
+            </strong>
+        </p>
+
+        <p>
+            Average Daily Spend:
+            <strong>
+                ${{ daily_average }}
+            </strong>
+        </p>
+
+    </div>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Analytics
+</h2>
+
+<!-- Analytics Dashboard -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+            Analytics Dashboard
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <div class="alert border-primary h-100">
+
+                    <strong>
+                        Top Category
+                    </strong>
+
+                    <br>
+
+                    {{ top_category }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert card border-danger h-100">
+
+                    <strong>
+                        Largest Expense
+                    </strong>
+
+                    <br>
+
+                    ${{ largest_expense_amount }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert card border-success h-100">
+
+                    <strong>
+                        Average Expense
+                    </strong>
+
+                    <br>
+
+                    ${{ average_expense }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert card border-warning h-100">
+
+                    <strong>
+                        Transactions
+                    </strong>
+
+                    <br>
+
+                    {{ total_transactions }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Charts
+</h2>
+
+<!-- Expense Breakdown -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+            Expense Breakdown
+        </h3>
+
+        <canvas
+            id="expenseChart"
+            height="120">
+        </canvas>
+
+    </div>
+
+</div>
+
+<!-- Monthly Spending Trend -->
+
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+            Monthly Spending Trend
+        </h3>
+
+        <canvas
+            id="trendChart"
+            height="120">
+        </canvas>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+// Expense Pie Chart
+
+const ctx = document.getElementById(
+    'expenseChart'
+);
+
+new Chart(ctx, {
+
+    type: 'pie',
+
+    data: {
+
+        labels: {{ expense_categories|safe }},
+
+        datasets: [{
+
+            data: {{ expense_amounts|safe }}
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'bottom'
+
+            }
+
+        }
+
+    }
+
+});
+
+
+// Monthly Trend Chart
+
+const trendCtx = document.getElementById(
+    'trendChart'
+);
+
+new Chart(trendCtx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+
+        ],
+
+        datasets: [{
+
+            label: 'Monthly Expenses',
+
+            data: {{ monthly_totals|safe }},
+
+            tension: 0.3
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true
+
+    }
+
+});
+
+</script>
+
+<h2 class="mt-5 mb-3">
+    Notifications
+</h2>
+
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+
+            🔔 Notifications
+
+        </h3>
+
+        <ul class="list-group">
+
+            {% for note in notifications %}
+
+            <li class="list-group-item">
+
+                {{ note }}
+
+            </li>
+
+            {% empty %}
+
+            <li class="list-group-item">
+
+                No notifications
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    AI Insights
+</h2>
+
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+
+            🤖 AI Spending Insights
+
+        </h3>
+
+        <ul class="list-group">
+
+            {% for insight in insights %}
+
+            <li class="list-group-item">
+
+                {{ insight }}
+
+            </li>
+
+            {% empty %}
+
+            <li class="list-group-item">
+
+                No insights available
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}
