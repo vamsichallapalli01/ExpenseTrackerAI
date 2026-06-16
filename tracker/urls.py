@@ -11,7 +11,7 @@ urlpatterns = [
     ),
 
     path('login/',
-      auth_views.LoginView.as_view(template_name='tracker/login.html'),
+      auth_views.LoginView.as_view(template_name='login.html'),
       name='login'
     ),
 

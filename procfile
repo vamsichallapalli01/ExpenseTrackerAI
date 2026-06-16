@@ -1,1 +1,1 @@
-web: gunicorn moneytracker.wsgi
+web: gunicorn moneytracker.wsgi:application
