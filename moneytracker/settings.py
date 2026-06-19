@@ -28,15 +28,15 @@ SECRET_KEY = 'django-insecure-0_z--)4rzt==v3+kw*%9xo^3t=2rm!hk($yy0@j)q(r3+=sb94
 DEBUG = False
 
 ALLOWED_HOSTS = [
-
-    "expensetrackerai-hst6.onrender.com",
-    ".onrender.com",
+    "127.0.0.1",
     "localhost",
-    "127.0.0.1"
+    "expensetrackerai-p2pd.onrender.com",
+    ".onrender.com",
 ]
 
+
 CSRF_TRUSTED_ORIGINS = [
-    "https://expensetrackerai-hst6.onrender.com",
+    "https://expensetrackerai-p2pd.onrender.com",
 ]
 
 # Application definition

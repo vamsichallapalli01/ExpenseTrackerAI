@@ -1,7 +1,7 @@
-var staticCacheName = "expense-tracker-ai-v1";
+var staticCacheName = "expense-tracker-ai-v4";
 
 var filesToCache = [
-    '/',
+    '/login/',
     '/manifest.json',
     '/static/icon-160.png',
     '/static/icon-512.png'
@@ -11,9 +11,8 @@ self.addEventListener("install", event => {
     self.skipWaiting();
 
     event.waitUntil(
-        caches.open(staticCacheName).then(cache => {
-            return cache.addAll(filesToCache);
-        })
+        caches.open(staticCacheName)
+            .then(cache => cache.addAll(filesToCache))
     );
 });
 
@@ -33,8 +32,7 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
     event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
     );
 });
