@@ -6,7 +6,8 @@ from .models import RecurringExpense
 from .models import (
     Income,
     Expense,
-    Budget
+    Budget,
+    Receipt,
 )
 
 
@@ -206,7 +207,8 @@ class BudgetForm(forms.ModelForm):
 
         fields = [
 
-            'monthly_budget'
+            'monthly_budget',
+            'currency'
 
         ]
 
@@ -337,3 +339,22 @@ class RecurringExpenseForm(
             )
 
         }
+class ReceiptForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Receipt
+
+        fields = [
+
+            'image'
+
+        ]
+
+class RestoreForm(
+
+    forms.Form
+
+):
+
+    backup_file = forms.FileField()

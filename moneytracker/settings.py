@@ -42,6 +42,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,28 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'pwa',
+
+    'rest_framework',
+
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'tracker',
+]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
+
 ]
 
 MIDDLEWARE = [
@@ -61,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'moneytracker.urls'
@@ -88,8 +111,8 @@ WSGI_APPLICATION = 'moneytracker.wsgi.application'
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-if DATABASE_URL and "render.com" in DATABASE_URL:
-    import dj_database_url
+if DATABASE_URL:
+
 
     DATABASES = {
         "default": dj_database_url.parse(
@@ -141,9 +164,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
@@ -158,3 +181,66 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'vamsichallapalli01@gmail.com'
+EMAIL_HOST_PASSWORD = 'tyoy gbvi xdyo dsii'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_PERMISSION_CLASSES': [
+
+        'rest_framework.permissions.IsAuthenticated',
+
+    ],
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+
+}
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/login/'
+
+# Google Login Settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+PWA_APP_NAME = 'Expense Tracker AI'
+PWA_APP_DESCRIPTION = "AI Powered Expense Tracker"
+PWA_APP_THEME_COLOR = '#198754'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_START_URL = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_LANG = 'en-US'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_SERVICE_WORKER_PATH = BASE_DIR / "static" / "serviceworker.js"
+PWA_APP_ICONS = [
+    {
+        'src': '/static/icon-160.png',
+        'sizes': '160x160'
+    },
+    {
+        'src': '/static/icon-512.png',
+        'sizes': '512x512'
+    }
+]
+

@@ -1,6 +1,9 @@
+{% load pwa %}
 <!DOCTYPE html>
 <html>
 <head>
+
+    {% progressive_web_app_meta %}
 
     <title>Expense Tracker AI</title>
 
@@ -159,9 +162,22 @@
                 <li class="nav-item">
 
                     <a   class="nav-link"
-                    href="/profile/">
+                    href="/recurring/">
 
-                    Profile
+                    Recurring
+
+                    </a>
+
+                </li>
+                <li class="nav-item">
+
+                    <a
+
+                    class="nav-link"
+
+                    href="/receipt/">
+
+                    Receipt Scanner
 
                     </a>
 
@@ -169,9 +185,9 @@
                 <li class="nav-item">
 
                     <a   class="nav-link"
-                    href="/recurring/">
+                    href="/profile/">
 
-                    Recurring
+                    Profile
 
                     </a>
 

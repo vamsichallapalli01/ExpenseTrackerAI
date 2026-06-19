@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2>
+
+AI Receipt Scanner
+
+</h2>
+
+<form
+
+method="POST"
+
+enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button
+
+class="btn btn-primary">
+
+Scan Receipt
+
+</button>
+
+</form>
+
+{% if text %}
+
+<hr>
+
+<h4>
+
+Extracted Text
+
+</h4>
+
+<pre>
+
+{{ text }}
+
+</pre>
+<hr>
+
+<h4>
+
+AI Analysis
+
+</h4>
+
+<p>
+
+Store:
+<strong>
+
+{{ store }}
+
+</strong>
+
+</p>
+
+<p>
+
+Category:
+<strong>
+
+{{ category }}
+
+</strong>
+
+</p>
+
+<p>
+
+Amount:
+<strong>
+
+${{ amount }}
+
+</strong>
+
+</p>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

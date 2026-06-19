@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Expense History
+</h2>
+
+<div class="card mb-4 shadow">
+    <div class="card-body">
+
+        <form method="GET">
+
+            <div class="row">
+
+                <div class="col-md-3 mt-2">
+                    <input
+                        type="text"
+                        name="category"
+                        class="form-control"
+                        placeholder="Category">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <input
+                        type="date"
+                        name="date"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <input
+                        type="number"
+                        name="amount"
+                        class="form-control"
+                        placeholder="Amount">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <input
+                        type="number"
+                        name="month"
+                        min="1"
+                        max="12"
+                        class="form-control"
+                        placeholder="Month">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <input
+                        type="number"
+                        name="year"
+                        class="form-control"
+                        placeholder="Year">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <select
+                        name="sort"
+                        class="form-control">
+
+                        <option value="">Sort</option>
+                        <option value="high">Highest First</option>
+                        <option value="low">Lowest First</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <button
+                        class="btn btn-primary w-100">
+
+                        Search
+
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="alert alert-success">
+    Total Filtered Expenses:
+    <strong>
+        {{ currency_symbol }}{{ filtered_total }}
+    </strong>
+</div>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for expense in expenses %}
+
+        <tr>
+            <td>{{ expense.category }}</td>
+
+            <td>
+                {{ currency_symbol }}{{ expense.amount }}
+            </td>
+
+            <td>{{ expense.date }}</td>
+
+            <td>{{ expense.description }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

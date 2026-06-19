@@ -79,5 +79,84 @@ urlpatterns = [
     views.add_recurring_expense,
     name='add_recurring_expense'
 
-  ),
+    ),
+    path(
+    'receipt/',
+    views.upload_receipt,
+    name='receipt'
+
+    ),
+    path(
+    'send-report/',
+    views.send_report,
+    name='send_report'
+    ),
+
+    path(
+    'api/income/',
+    views.IncomeListAPI.as_view(),
+    name='api_income'
+    ),
+
+    path(
+    'api/expense/',
+    views.ExpenseListAPI.as_view(),
+    name='api_expense'
+    ),
+
+    path(
+    'api/budget/',
+    views.BudgetAPI.as_view(),
+    name='api_budget'
+    ),
+
+    path(
+    'api/dashboard/',
+    views.DashboardAPI.as_view(),
+    name='api_dashboard'
+    ),
+
+    path(
+    'income/edit/<int:pk>/',
+    views.edit_income,
+    name='edit_income'
+    ),
+
+    path(
+    'income/delete/<int:pk>/',
+    views.delete_income,
+    name='delete_income'
+    ),
+
+    path(
+    'expense/edit/<int:pk>/',
+    views.edit_expense,
+    name='edit_expense'
+    ),
+
+    path(
+    'expense/delete/<int:pk>/',
+    views.delete_expense,
+    name='delete_expense'
+    ),
+    path(
+    'income/list/',
+    views.income_list,
+    name='income_list'
+    ),
+    path(
+    'expense/list/',
+    views.expense_list,
+    name='expense_list'
+    ),
+    path(
+    'backup/',
+    views.backup_data,
+    name='backup_data'
+    ),
+    path(
+    'restore/',
+    views.restore_data,
+    name='restore_data'
+    ),
 ]

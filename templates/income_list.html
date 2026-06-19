@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+
+    Income History
+
+</h2>
+
+<table class="table">
+
+    <tr>
+
+        <th>Source</th>
+
+        <th>Amount</th>
+
+        <th>Date</th>
+
+        <th>Edit</th>
+
+        <th>Delete</th>
+
+    </tr>
+
+    {% for income in incomes %}
+
+    <tr>
+
+        <td>
+
+            {{ income.source }}
+
+        </td>
+
+        <td>
+
+            {{ currency_symbol }}{{ income.amount }}
+
+        </td>
+
+        <td>
+
+            {{ income.date }}
+
+        </td>
+
+        <td>
+
+            <a
+
+                href="/income/edit/{{ income.id }}/"
+
+                class="btn btn-warning btn-sm">
+
+                Edit
+
+            </a>
+
+        </td>
+
+        <td>
+
+            <a
+
+                href="/income/delete/{{ income.id }}/"
+
+                class="btn btn-danger btn-sm">
+
+                Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

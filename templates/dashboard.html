@@ -27,7 +27,7 @@
                 </h5>
 
                 <h2 class="text-success">
-                    ${{ total_income }}
+                    {{ currency_symbol }}{{ total_income }}
                 </h2>
 
             </div>
@@ -48,7 +48,7 @@
                 </h5>
 
                 <h2 class="text-danger">
-                    ${{ total_expense }}
+                    {{ currency_symbol }}{{ total_expense }}
                 </h2>
 
             </div>
@@ -69,7 +69,7 @@
                 </h5>
 
                 <h2 class="text-primary">
-                    ${{ savings }}
+                    {{ currency_symbol }}{{ savings }}
                 </h2>
 
             </div>
@@ -94,6 +94,27 @@
         Set Budget
     </a>
 
+    <a href="/send-report/"class="btn btn-warning">
+        Email Report
+    </a>
+
+    <a href="/income/list/"class="btn btn-info">
+        Income History
+    </a>
+
+    <a href="/expense/list/"class="btn btn-info">
+        Expense History
+    </a>
+
+    <a href="/backup/"class="btn btn-secondary">
+        Backup Data
+
+    </a>
+
+    <a href="/restore/"class="btn btn-dark">
+        Restore Data
+
+    </a>
 </div>
 
 <h2 class="mt-5 mb-3">
@@ -121,6 +142,8 @@
                 <th>Category</th>
                 <th>Amount</th>
                 <th>Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
 
             </tr>
 
@@ -132,13 +155,57 @@
 
             <tr>
 
-                <td>{{ expense.category }}</td>
+                <td>
 
-                <td>${{ expense.amount }}</td>
+                    {{ expense.category }}
 
-                <td>{{ expense.date }}</td>
+                </td>
 
-            </tr>
+                <td>
+
+                    {{ currency_symbol }}{{ expense.amount }}
+
+                </td>
+
+                <td>
+
+                    {{ expense.date }}
+
+                </td>
+
+                <td>
+
+                    <a
+
+                    href="/expense/edit/{{ expense.id }}/"
+
+                    class="btn btn-sm btn-warning">
+
+                    Edit
+
+                    </a>
+
+                </td>
+
+            <td>
+
+        <a
+
+            href="/expense/delete/{{ expense.id }}/"
+
+            class="btn btn-sm btn-danger"
+
+            onclick="return confirm(
+                'Delete this expense?'
+            );">
+
+            Delete
+
+            </a>
+
+            </td>
+
+        </tr>
 
             {% empty %}
 
@@ -181,14 +248,14 @@
         <p>
             Monthly Budget:
             <strong>
-                ${{ monthly_budget }}
+                {{ currency_symbol }}{{ monthly_budget }}
             </strong>
         </p>
 
         <p>
             Remaining Budget:
             <strong>
-                ${{ remaining_budget }}
+                {{ currency_symbol }}{{ remaining_budget }}
             </strong>
         </p>
 
@@ -226,14 +293,14 @@
         <p>
             Total Spent This Month:
             <strong>
-                ${{ monthly_expense_total }}
+                {{ currency_symbol }}{{ monthly_expense_total }}
             </strong>
         </p>
 
         <p>
             Total Income This Month:
             <strong>
-                ${{ monthly_income_total }}
+                {{ currency_symbol }}{{ monthly_income_total }}
             </strong>
         </p>
 
@@ -479,6 +546,7 @@ new Chart(trendCtx, {
 
 </script>
 
+
 <h2 class="mt-5 mb-3">
     Notifications
 </h2>
@@ -558,4 +626,423 @@ new Chart(trendCtx, {
     </div>
 
 </div>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            🔮 AI Spending Prediction
+
+        </h3>
+
+        <hr>
+
+        <p>
+
+            Predicted Next Month Spending:
+
+            <strong>
+
+                {{ currency_symbol }}{{ prediction }}
+
+            </strong>
+
+        </p>
+
+        <p>
+
+            Predicted Savings:
+
+            <strong>
+
+                {{ currency_symbol }}{{ predicted_savings }}
+
+            </strong>
+
+        </p>
+
+        <div class="alert alert-info">
+
+            {{ risk_message }}
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            🚨 Budget Overrun Prediction
+
+        </h3>
+
+        <hr>
+
+        <p>
+
+            Budget Status:
+
+            {% if budget_status == "Excellent" %}
+
+            <span class="badge bg-success">
+
+            {{ budget_status }}
+
+            </span>
+
+            {% elif budget_status == "Good" %}
+
+            <span class="badge bg-primary">
+
+            {{ budget_status }}
+
+        </span>
+
+            {% elif budget_status == "Warning" %}
+
+            <span class="badge bg-warning">
+
+            {{ budget_status }}
+
+        </span>
+
+        {% else %}
+
+        <span class="badge bg-danger">
+
+        {{ budget_status }}
+
+        </span>
+
+        {% endif %}
+
+        </p>
+
+        <p>
+
+            Budget Score:
+
+            <strong>
+
+                {{ budget_score }}
+
+            </strong>
+
+        </p>
+
+        <p>
+
+            Difference:
+
+            <strong>
+
+                ${{ budget_difference }}
+
+            </strong>
+
+        </p>
+
+        <div class="alert alert-warning">
+
+            {{ overrun_alert }}
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            💰 Future Savings Forecast
+
+        </h3>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <div class="alert alert-success">
+
+                    <strong>
+
+                        1 Month
+
+                    </strong>
+
+                    <br>
+
+                    ${{ savings_1_month }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert alert-primary">
+
+                    <strong>
+
+                        3 Months
+
+                    </strong>
+
+                    <br>
+
+                    ${{ savings_3_months }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert alert-warning">
+
+                    <strong>
+
+                        6 Months
+
+                    </strong>
+
+                    <br>
+
+                    ${{ savings_6_months }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="alert alert-info">
+
+                    <strong>
+
+                        12 Months
+
+                    </strong>
+
+                    <br>
+
+                    ${{ savings_12_months }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            🏆 Financial Health Score
+
+        </h3>
+
+        <hr>
+
+        <h1 class="text-center">
+
+            {{ financial_score }}/100
+
+        </h1>
+        <div class="progress mb-3">
+
+        <div
+
+         class="progress-bar"
+
+         style="width: {{ financial_score }}%;">
+
+        {{ financial_score }}%
+
+        </div>
+
+</div>
+
+        <div class="text-center">
+
+            <h4>
+
+                {% if financial_status == "Excellent" %}
+
+                <span class="badge bg-success">
+
+                {{ financial_status }}
+
+                </span>
+
+                {% elif financial_status == "Good" %}
+
+                <span class="badge bg-primary">
+
+                {{ financial_status }}
+
+                </span>
+
+                {% elif financial_status == "Average" %}
+
+                <span class="badge bg-warning">
+
+                {{ financial_status }}
+
+                </span>
+
+                {% else %}
+
+                <span class="badge bg-danger">
+
+                {{ financial_status }}
+
+            </span>
+
+{% endif %}
+
+            </h4>
+
+        </div>
+
+        <hr>
+
+        <p>
+
+            Savings Rate:
+
+            <strong>
+
+                {{ savings_rate }}%
+
+            </strong>
+
+        </p>
+
+        <div class="alert alert-info">
+
+            {{ health_message }}
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3 class="mb-3">
+
+            🤖 AI Recommendations
+
+        </h3>
+
+        <ul class="list-group">
+
+            {% for item in recommendations %}
+
+            <li class="list-group-item">
+
+                {{ item }}
+
+            </li>
+
+            {% empty %}
+
+            <li class="list-group-item">
+
+                No recommendations available.
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            📈 Savings Forecast Chart
+
+        </h3>
+
+        <canvas
+            id="forecastChart">
+        </canvas>
+
+    </div>
+
+</div>
+<div class="alert alert-success mt-3">
+
+    {{ forecast_message }}
+
+</div>
+<script>
+
+const forecastCtx = document.getElementById(
+    'forecastChart'
+);
+
+new Chart(
+
+    forecastCtx,
+
+    {
+
+        type: 'line',
+
+        data: {
+
+            labels:
+            {{ forecast_labels|safe }},
+
+            datasets: [{
+
+                label:
+                'Future Savings',
+
+                data:
+                {{ forecast_values|safe }},
+
+                tension: 0.3
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true
+
+        }
+
+    }
+
+);
+</script>
+
 {% endblock %}

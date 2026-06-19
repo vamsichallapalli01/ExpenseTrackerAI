@@ -64,6 +64,16 @@ class Expense(models.Model):
 
 class Budget(models.Model):
 
+    CURRENCY_CHOICES = [
+
+        ('USD', '$ US Dollar'),
+        ('INR', '₹ Indian Rupee'),
+        ('EUR', '€ Euro'),
+        ('GBP', '£ British Pound'),
+
+    ]
+
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -72,6 +82,12 @@ class Budget(models.Model):
     monthly_budget = models.DecimalField(
         max_digits=10,
         decimal_places=2
+    )
+    
+    currency = models.CharField(
+        max_length=10,
+        choices=CURRENCY_CHOICES,
+        default='USD'
     )
 
     def __str__(self):
@@ -137,3 +153,30 @@ class RecurringExpense(models.Model):
     def __str__(self):
 
         return self.name
+    
+
+class Receipt(models.Model):
+
+    user = models.ForeignKey(
+
+        User,
+
+        on_delete=models.CASCADE
+
+    )
+
+    image = models.ImageField(
+
+        upload_to='receipts/'
+
+    )
+
+    uploaded_at = models.DateTimeField(
+
+        auto_now_add=True
+
+    )
+
+    def __str__(self):
+
+        return str(self.id)
