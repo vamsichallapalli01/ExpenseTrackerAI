@@ -14,8 +14,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('', include('tracker.urls')),
-
-    path('', views.dashboard, name='dashboard'),
 ]
 
 if settings.DEBUG:
