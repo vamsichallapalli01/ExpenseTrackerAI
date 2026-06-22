@@ -1,10 +1,9 @@
-var staticCacheName = "expense-tracker-ai-v4";
+var staticCacheName = "expense-tracker-ai-v6";
 
 var filesToCache = [
-    '/login/',
-    '/manifest.json',
-    '/static/icon-160.png',
-    '/static/icon-512.png'
+    "/manifest.json",
+    "/static/icon-160.png",
+    "/static/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
@@ -28,11 +27,17 @@ self.addEventListener("activate", event => {
             );
         })
     );
+
+    self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
+    if (event.request.method !== "GET") {
+        return;
+    }
+
     event.respondWith(
-        caches.match(event.request)
-            .then(response => response || fetch(event.request))
+        fetch(event.request)
+            .catch(() => caches.match(event.request))
     );
 });
