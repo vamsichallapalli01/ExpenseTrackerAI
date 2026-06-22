@@ -1,19 +1,17 @@
-var staticCacheName = "expense-tracker-ai-v1";
+var staticCacheName = "expense-tracker-ai-v6";
 
 var filesToCache = [
-    '/',
-    '/manifest.json',
-    '/static/icon-160.png',
-    '/static/icon-512.png'
+    "/manifest.json",
+    "/static/icon-160.png",
+    "/static/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
     self.skipWaiting();
 
     event.waitUntil(
-        caches.open(staticCacheName).then(cache => {
-            return cache.addAll(filesToCache);
-        })
+        caches.open(staticCacheName)
+            .then(cache => cache.addAll(filesToCache))
     );
 });
 
@@ -29,12 +27,17 @@ self.addEventListener("activate", event => {
             );
         })
     );
+
+    self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
+    if (event.request.method !== "GET") {
+        return;
+    }
+
     event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
+        fetch(event.request)
+            .catch(() => caches.match(event.request))
     );
 });
