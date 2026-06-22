@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        username = "admin"
-        password = "Admin@12345"
-        email = "admin@example.com"
+        username = "Vamsic007"
+        password = "Varshi@15"
+        email = "vamsichallapalli01@gmail.com"
 
         if not User.objects.filter(username=username).exists():
             User.objects.create_superuser(
