@@ -229,6 +229,25 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+SOCIALACCOUNT_STORE_TOKENS = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": os.environ.get("GOOGLE_CLIENT_ID"),
+            "secret": os.environ.get("GOOGLE_CLIENT_SECRET"),
+            "key": ""
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
+}
+
 PWA_APP_NAME = 'Expense Tracker AI'
 PWA_APP_DESCRIPTION = "AI Powered Expense Tracker"
 PWA_APP_THEME_COLOR = '#198754'
