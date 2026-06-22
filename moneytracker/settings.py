@@ -229,8 +229,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-SOCIALACCOUNT_STORE_TOKENS = True
-
 
 PWA_APP_NAME = 'Expense Tracker AI'
 PWA_APP_DESCRIPTION = "AI Powered Expense Tracker"
