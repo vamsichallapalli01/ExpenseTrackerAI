@@ -32,12 +32,12 @@ DEBUG = True if os.environ.get("DEBUG", "False").lower() == "true" else False
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "expensetrackerai-p2pd.onrender.com",
+    "https://expensetrackerai-0pae.onrender.com",
 ]
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://expensetrackerai-p2pd.onrender.com",
+    "https://expensetrackerai-0pae.onrender.com",
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
